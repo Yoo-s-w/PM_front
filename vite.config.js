@@ -17,7 +17,8 @@ export default defineConfig({
         proxy: {
             // '/api'로 시작하는 모든 요청을 백엔드(8080번 포트)로 전달
             '/api': {
-                target: 'http://localhost:8080',
+                // target: 'http://localhost:8080',
+                target: VITE_API_URL,
                 changeOrigin: true,
                 // rewrite: (path) => path.replace(/^\/api/, ''),
             },

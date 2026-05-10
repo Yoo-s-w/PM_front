@@ -2,9 +2,12 @@
 
 import axios from 'axios';
 
+// 환경 변수(VITE_API_URL)가 있으면 사용하고, 없으면 '/api' 사용
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+
 const apiClient = axios.create({
     // vite.config.js 프록시 설정에 따라 '/api'를 기본 경로로 사용
-    baseURL: '/api',
+    baseURL: BASE_URL,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -32,7 +35,7 @@ apiClient.interceptors.request.use(
     },
     (error) => {
         return Promise.reject(error);
-    }
+    },
 );
 
 // (기존) API 응답 가로채기 (Response Interceptor)
@@ -68,7 +71,7 @@ apiClient.interceptors.response.use(
         }
 
         return Promise.reject(error);
-    }
+    },
 );
 
 export default apiClient;
